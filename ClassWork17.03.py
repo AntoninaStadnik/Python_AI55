@@ -61,3 +61,5 @@ for line in text:
 
 with open("text.txt", "w") as file:
     file.write(new_text)
+
+def hello(world):
