@@ -1,0 +1,101 @@
+gamepc@DESKTOP-UUVDLBA:~$ redis-cli
+127.0.0.1:6379> set name John Doe
+(error) ERR syntax error
+127.0.0.1:6379> set name "John Doe"
+OK
+127.0.0.1:6379> get name
+"John Doe"
+127.0.0.1:6379> rpush fruits "apple" "banana" "orange"
+(integer) 3
+127.0.0.1:6379> lrange fruits 0 -1
+1) "apple"
+2) "banana"
+3) "orange"
+127.0.0.1:6379> hmset user: name Alice
+OK
+127.0.0.1:6379> hset user: age 25
+(integer) 1
+127.0.0.1:6379> hmgetall
+(error) ERR unknown command 'hmgetall'
+127.0.0.1:6379> hgetall user:
+1) "name"
+2) "Alice"
+3) "age"
+4) "25"
+127.0.0.1:6379> sadd tags "red" "green" "blue"
+(integer) 3
+127.0.0.1:6379> smembers tags
+1) "red"
+2) "green"
+3) "blue"
+127.0.0.1:6379> incr counter
+(integer) 1
+127.0.0.1:6379> get counter
+"1"
+127.0.0.1:6379> incr counter
+(integer) 2
+127.0.0.1:6379> incr counter
+(integer) 3
+127.0.0.1:6379> incr counter
+(integer) 4
+127.0.0.1:6379> get counter
+"4"
+127.0.0.1:6379> del user: name
+(integer) 2
+127.0.0.1:6379> sgetall
+(error) ERR unknown command 'sgetall'
+127.0.0.1:6379> get name
+(nil)
+127.0.0.1:6379> exists name
+(integer) 0
+127.0.0.1:6379> exists counter
+(integer) 1
+127.0.0.1:6379> setex message 10 "Hello Redis!"
+OK
+127.0.0.1:6379> get message
+(nil)
+127.0.0.1:6379> keyes*
+(error) ERR unknown command 'keyes*'
+127.0.0.1:6379> keyes *
+(error) ERR unknown command 'keyes', with args beginning with: '*'
+127.0.0.1:6379> keys *
+1) "tags"
+2) "fruits"
+3) "age"
+4) "counter"
+127.0.0.1:6379> geoadd geolocation 46.48 30.43 Odesa
+(integer) 1
+127.0.0.1:6379> keys *
+1) "tags"
+2) "fruits"
+3) "geolocation"
+4) "age"
+5) "counter"
+127.0.0.1:6379> geoadd geolocation 50.45 30.52 Kyiv
+(integer) 1
+127.0.0.1:6379> geodist
+(error) ERR wrong number of arguments for 'geodist' command
+127.0.0.1:6379> geodist geolocation Odesa Kyiv
+"380678.1264"
+127.0.0.1:6379> geodist geolocation Odesa Kyiv km
+"380.6781"
+127.0.0.1:6379> set student:ivan 40
+OK
+127.0.0.1:6379> set student:anna 29
+OK
+127.0.0.1:6379> set student:igor 38
+OK
+127.0.0.1:6379> set student:mike 29
+OK
+127.0.0.1:6379> get student anna
+(error) ERR wrong number of arguments for 'get' command
+127.0.0.1:6379> get student:ivan
+"40"
+127.0.0.1:6379> keys student:*
+1) "student:igor"
+2) "student:mike"
+3) "student:ivan"
+4) "student:anna"
+127.0.0.1:6379> flushall
+OK
+127.0.0.1:6379>
